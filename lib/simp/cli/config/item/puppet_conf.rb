@@ -35,11 +35,9 @@ module Simp::Cli::Config
       `sed -i '/.*trusted_node_data.*/d' #{@file}`
       `sed -i '/.*digest_algorithm.*/d'  #{@file}`
       `sed -i '/.*stringify_facts.*/d'   #{@file}`
-      `sed -i '/.*environment_path.*/d'  #{@file}`
       `sed -i '/^.main./ a \\    trusted_node_data = true\'   #{@file}`
       `sed -i '/^.main./ a \\    digest_algorithm  = sha256\' #{@file}`
       `sed -i '/^.main./ a \\    stringify_facts   = false\'  #{@file}`
-      `sed -i '/^.main./ a \\    environmentpath   = /etc/puppet/environments\' #{@file}`
       `sed -i '/trusted_node_data/ a \\    server            = #{@config_items.fetch( 'puppet::server' ).value}\' #{@file}`
       keylength = @config_items.fetch( 'use_fips', nil )? '2048' : '4096'
       `sed -i '/^.main./ a \\    keylength         = #{keylength}\' #{@file}`
